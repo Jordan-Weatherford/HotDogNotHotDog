@@ -124,8 +124,11 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
 		// String that will hold the result score percentage from Watson
 		var resultScorePercentage: String!
 		// Classify image using Visual Recognition
-		
-		let recogURL = URL(string: "https://pbs.twimg.com/profile_images/558109954561679360/j1f9DiJi.jpeg")!
+		let woman = "https://specials-images.forbesimg.com/imageserve/5735f1e44bbe6f636184ff7e/416x416.jpg?background=000000&cropX1=34&cropX2=697&cropY1=23&cropY2=686"
+        
+        let men = "https://pbs.twimg.com/profile_images/558109954561679360/j1f9DiJi.jpeg"
+        
+		let recogURL = URL(string: woman)!
         print("right before")
 		visualRecognition.detectFaces(inImageFile: recogURL, failure: failVisualRecognitionWithError) {
 			detectedFaces in
@@ -140,6 +143,23 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
                     resultScorePercentage = String(Int(round(face.gender.score * 100))) + "%"
                     print(resultName)
                     print(resultScorePercentage)
+                    if resultName == "MALE"
+                    {
+                        let alertController = UIAlertController(title: "Result:", message:
+                            "Hotdog", preferredStyle: UIAlertControllerStyle.alert)
+                        alertController.addAction(UIAlertAction(title: "Dismiss", style: UIAlertActionStyle.default,handler: nil))
+                        
+                        self.present(alertController, animated: true, completion: nil)
+                    }
+                    
+                    else
+                    {
+                        let alertController = UIAlertController(title: "Result:", message:
+                            "Not Hotdog", preferredStyle: UIAlertControllerStyle.alert)
+                        alertController.addAction(UIAlertAction(title: "Dismiss", style: UIAlertActionStyle.default,handler: nil))
+                        
+                        self.present(alertController, animated: true, completion: nil)
+                    }
 
 				}
 			}
