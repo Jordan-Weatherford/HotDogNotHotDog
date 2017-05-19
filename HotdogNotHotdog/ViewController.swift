@@ -10,11 +10,13 @@ import UIKit
 import AVFoundation
 import VisualRecognitionV3
 
+var theurl: URL = URL(string: "www.google.com")!
+
 class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, AVCapturePhotoCaptureDelegate {
     
     @IBOutlet weak var tempImageView: UIImageView!
     @IBOutlet weak var cameraView: UIView!
-	
+//    var blah = URL(String: theurl)
 	// Array of TagItems
 	var tagItems: [TagItem] = []
 	
@@ -80,8 +82,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
             let photoSettings = AVCapturePhotoSettings(format: [AVVideoCodecKey: AVVideoCodecJPEG])
             stillImageOutput?.capturePhoto(with: photoSettings, delegate: self)
         }
-		
-		classifyImage()
+		classifyImage(theurl)
     }
 
     override func viewDidLoad() {
@@ -95,17 +96,36 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     }
     
     //AVPhotoCapture Delegate function
-    func capture(_ captureOutput: AVCapturePhotoOutput, didFinishProcessingPhotoSampleBuffer photoSampleBuffer: CMSampleBuffer?, previewPhotoSampleBuffer: CMSampleBuffer?, resolvedSettings: AVCaptureResolvedPhotoSettings, bracketSettings: AVCaptureBracketedStillImageSettings?, error: Error?) {
+    func capture(_ captureOutput: AVCapturePhotoOutput, didFinishProcessingPhotoSampleBuffer photoSampleBuffer: CMSampleBuffer?, previewPhotoSampleBuffer: CMSampleBuffer?, resolvedSettings: AVCaptureResolvedPhotoSettings, bracketSettings: AVCaptureBracketedStillImageSettings?, error: Error?){
+        var fileURL: URL!
         if let error = error {
             print(error.localizedDescription)
         }
         
         if let sampleBuffer = photoSampleBuffer, let dataImage = AVCapturePhotoOutput.jpegPhotoDataRepresentation(forJPEGSampleBuffer: sampleBuffer, previewPhotoSampleBuffer: nil){
+          
+            
             image = UIImage(data: dataImage)
+        
+            let documentsURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
+            // Save the image as a JPEG
+            let imageToSave:Data = UIImageJPEGRepresentation(image!, 1.0)!
+            // Append file name to document location
+            fileURL = documentsURL.appendingPathComponent("image.jpg")
+            // Save the image in the provided location
+            try? imageToSave.write(to: fileURL, options: [])
+            // Clear the tagItems array
+            tagItems = []
+            // Call the classifyImage function with the saved image
+            classifyImage(fileURL)
+            print(fileURL)
+            
+            
             performSegue(withIdentifier: "imageCapturedSegue", sender: nil)
         } else {
             print("FAILED AT IMAGE PROCESSING")
         }
+        theurl = fileURL
         
     }
 	
@@ -116,7 +136,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
 		
 	}
 	
-	func classifyImage() {
+	func classifyImage(_: URL) {
 		// String that will hold the result name from Watson
 		var resultName: String!
 		// Double that will hold the result scored from Watson
@@ -128,12 +148,15 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         
         let men = "https://pbs.twimg.com/profile_images/558109954561679360/j1f9DiJi.jpeg"
         
-		let recogURL = URL(string: woman)!
+//        let recogURL = URL(string:men)!
+        let recogURL = theurl
         print("right before")
-		visualRecognition.detectFaces(inImageFile: recogURL, failure: failVisualRecognitionWithError) {
+
+        visualRecognition.detectFaces(inImageFile: recogURL, failure: failVisualRecognitionWithError) {
 			detectedFaces in
 			// Loop through detected faces
 			for detectedFace in detectedFaces.images {
+                print("the thing thing")
 				// Loop through the faces found in detectedFaces
 				for face in detectedFace.faces {
 					// Set the result name, score and score percentage
@@ -150,6 +173,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
                         alertController.addAction(UIAlertAction(title: "Dismiss", style: UIAlertActionStyle.default,handler: nil))
                         
                         self.present(alertController, animated: true, completion: nil)
+                        print("maaale")
                     }
                     
                     else
@@ -159,6 +183,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
                         alertController.addAction(UIAlertAction(title: "Dismiss", style: UIAlertActionStyle.default,handler: nil))
                         
                         self.present(alertController, animated: true, completion: nil)
+                        print("femaaale")
                     }
 
 				}
