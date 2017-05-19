@@ -5,7 +5,6 @@
 //  Created by Nicole Zurita on 5/18/17.
 //  Copyright © 2017 Nicole Zurita. All rights reserved.
 //
-// comment
 
 import UIKit
 import AVFoundation
@@ -142,24 +141,6 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
                     print(resultName)
                     print(resultScorePercentage)
 
-					resultScore = face.gender.score
-					// Create new tag item based on result name, score and score percentage
-					let newTagItem = TagItem(watsonResultName: resultName, watsonResultScore: resultScore, watsonResultScorePercentage: resultScorePercentage)
-					// Append the new tag item to the tag items array
-					self.tagItems.append(newTagItem)
-					// If celebrity match is found add set the result name, score, and score percentage
-					if(face.identity != nil){
-						resultName = face.identity?.name
-						resultScore = face.identity?.score
-						resultScorePercentage = String(Int(round(resultScore * 100))) + "% "
-						let newTagItem = TagItem(watsonResultName: resultName,
-						                         watsonResultScore: resultScore,
-						                         watsonResultScorePercentage: resultScorePercentage)
-						// Append the new tag item to the tag items array
-						self.tagItems.append(newTagItem)
-						print("end")
-						
-					}
 				}
 			}
 			
@@ -168,29 +149,9 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
 
 				}
 			}
+        print("end")
 		}
-	
-//	let recogURL = URL(string: "https://unsplash.it/50/100?image=\(randumNumber)")!
-//		visualRecognition.classify(image: recogURL.absoluteString, failure: failure) {
-//			classifiedImages in
-//			if let classifiedImage = classifiedImages.images.first {
-//				print(classifiedImage.classifiers)
-//
-//				if let classification = classifiedImage.classifiers.first?.classes.first?.classification {
-//					DispatchQueue.main.async {
-//						self.navigationItem.title = classification
-//						button.isEnabled = true
-//					}
-//
-//				}
-//			}else{
-//				DispatchQueue.main.async {
-//					self.navigationItem.title = "could not be determined"
-//					button.isEnabled = true
-//				}
-//			}
-//		}
-//	}
+
 
     @IBAction func captureButtonPressed(_ sender: UIButton) {
         didPressTakePhoto()
