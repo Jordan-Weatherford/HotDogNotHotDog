@@ -118,7 +118,6 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
 	}
 	
 	func classifyImage() {
-		print("i'm heeeree!!")
 		// String that will hold the result name from Watson
 		var resultName: String!
 		// Double that will hold the result scored from Watson
@@ -128,6 +127,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
 		// Classify image using Visual Recognition
 		
 		let recogURL = URL(string: "https://pbs.twimg.com/profile_images/558109954561679360/j1f9DiJi.jpeg")!
+        print("right before")
 		visualRecognition.detectFaces(inImageFile: recogURL, failure: failVisualRecognitionWithError) {
 			detectedFaces in
 			// Loop through detected faces
@@ -136,23 +136,12 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
 				for face in detectedFace.faces {
 					// Set the result name, score and score percentage
 					// Handle optional min and max ages
-					if(((face.age.min) != nil) && ((face.age.max) != nil)) {
-						resultName = face.gender.gender + " (" + String(describing: face.age.min!) + "-" + String(describing: face.age.max!) + ")"
-						resultScorePercentage = String(Int(round(face.gender.score * 100))) + "% (" + String(Int(round(face.age.score * 100))) + "%)"
-					}
-					else if((face.age.min) != nil) {
-						resultName = face.gender.gender + " (" + String(describing: face.age.min!) + "-?)"
-						resultScorePercentage = String(Int(round(face.gender.score * 100))) + "% (" + String(Int(round(face.age.score * 100))) + "%)"
-						
-					}
-					else if((face.age.max) != nil) {
-						resultName = face.gender.gender + " (?-" + String(describing: face.age.max!) + ")"
-						resultScorePercentage = String(Int(round(face.gender.score * 100))) + "% (" + String(Int(round(face.age.score * 100))) + "%)"
-					}
-					else {
-						resultName = face.gender.gender
-						resultScorePercentage = String(Int(round(face.gender.score * 100)))
-					}
+                    print("somehwere inside")
+                    resultName = face.gender.gender
+                    resultScorePercentage = String(Int(round(face.gender.score * 100))) + "%"
+                    print(resultName)
+                    print(resultScorePercentage)
+
 					resultScore = face.gender.score
 					// Create new tag item based on result name, score and score percentage
 					let newTagItem = TagItem(watsonResultName: resultName, watsonResultScore: resultScore, watsonResultScorePercentage: resultScorePercentage)
@@ -168,7 +157,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
 						                         watsonResultScorePercentage: resultScorePercentage)
 						// Append the new tag item to the tag items array
 						self.tagItems.append(newTagItem)
-						print("hi")
+						print("end")
 						
 					}
 				}
