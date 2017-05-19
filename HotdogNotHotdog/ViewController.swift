@@ -170,27 +170,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
 			}
 		}
 	
-//	let recogURL = URL(string: "https://unsplash.it/50/100?image=\(randumNumber)")!
-//		visualRecognition.classify(image: recogURL.absoluteString, failure: failure) {
-//			classifiedImages in
-//			if let classifiedImage = classifiedImages.images.first {
-//				print(classifiedImage.classifiers)
-//
-//				if let classification = classifiedImage.classifiers.first?.classes.first?.classification {
-//					DispatchQueue.main.async {
-//						self.navigationItem.title = classification
-//						button.isEnabled = true
-//					}
-//
-//				}
-//			}else{
-//				DispatchQueue.main.async {
-//					self.navigationItem.title = "could not be determined"
-//					button.isEnabled = true
-//				}
-//			}
-//		}
-//	}
+
 
     @IBAction func captureButtonPressed(_ sender: UIButton) {
         didPressTakePhoto()
