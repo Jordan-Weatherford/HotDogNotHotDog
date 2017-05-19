@@ -17,6 +17,7 @@
 		0A60CAB41ECE704B00D2CAF3 /* VisualRecognitionV3.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 0A60CAB21ECE704B00D2CAF3 /* VisualRecognitionV3.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		0A60CAB71ECE705600D2CAF3 /* RestKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A60CAB61ECE705600D2CAF3 /* RestKit.framework */; };
 		0A60CAB81ECE705600D2CAF3 /* RestKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 0A60CAB61ECE705600D2CAF3 /* RestKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		0A60CABD1ECF8BF900D2CAF3 /* TagItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A60CABC1ECF8BF900D2CAF3 /* TagItem.swift */; };
 		17AEF5C71ECE66C400C68ADA /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 17AEF5C61ECE66C400C68ADA /* Default-568h@2x.png */; };
 		17B498F71ECE69B5002E2B3F /* ImageCapturedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17B498F61ECE69B5002E2B3F /* ImageCapturedViewController.swift */; };
 /* End PBXBuildFile section */
@@ -59,6 +60,7 @@
 		01F0A1C11ECE1AE000847908 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		0A60CAB21ECE704B00D2CAF3 /* VisualRecognitionV3.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = VisualRecognitionV3.framework; path = Carthage/Build/iOS/VisualRecognitionV3.framework; sourceTree = "<group>"; };
 		0A60CAB61ECE705600D2CAF3 /* RestKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RestKit.framework; path = Carthage/Build/iOS/RestKit.framework; sourceTree = "<group>"; };
+		0A60CABC1ECF8BF900D2CAF3 /* TagItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TagItem.swift; sourceTree = "<group>"; };
 		17AEF5C61ECE66C400C68ADA /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		17B498F61ECE69B5002E2B3F /* ImageCapturedViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageCapturedViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -86,6 +88,7 @@
 		01F0A19E1ECE1AE000847908 = {
 			isa = PBXGroup;
 			children = (
+				0A60CABC1ECF8BF900D2CAF3 /* TagItem.swift */,
 				0A60CAB61ECE705600D2CAF3 /* RestKit.framework */,
 				0A60CAB21ECE704B00D2CAF3 /* VisualRecognitionV3.framework */,
 				17AEF5C61ECE66C400C68ADA /* Default-568h@2x.png */,
@@ -255,6 +258,7 @@
 				01F0A1AD1ECE1AE000847908 /* ViewController.swift in Sources */,
 				17B498F71ECE69B5002E2B3F /* ImageCapturedViewController.swift in Sources */,
 				01F0A1AB1ECE1AE000847908 /* AppDelegate.swift in Sources */,
+				0A60CABD1ECF8BF900D2CAF3 /* TagItem.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
